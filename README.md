@@ -1,8 +1,7 @@
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-
 # API para la Gestión de franjas horarias FIET 
+![Static Badge](https://img.shields.io/badge/Spring%20Boot-3.3.5-1b1f23?style=for-the-badge&logo=spring%20boot&logoColor=white&labelColor=6cb52d) ![Static Badge](https://img.shields.io/badge/JDK-17-1b1f23?style=for-the-badge&logo=openjdk&logoColor=white&labelColor=orange) ![Static Badge](https://img.shields.io/badge/MySQL-4d7ca0?style=for-the-badge&logo=mysql&logoColor=white) 
+
+![Static Badge](https://img.shields.io/badge/Spring%20Boot-3.3.5-1b1f23?style=plastic&logo=spring%20boot&logoColor=white&labelColor=6cb52d) ![Static Badge](https://img.shields.io/badge/JDK-17-1b1f23?style=plastic&logo=openjdk&logoColor=white&labelColor=orange) ![Static Badge](https://img.shields.io/badge/MySQL-4d7ca0?style=plastic&logo=mysql&logoColor=white) 
 
 Proyecto para el curso de Arquitectura de Software para Aplicaciones Empresariales que consiste de un backend en Spring Boot, empleando Arquitectura Hexagonal o de Puertos y Adaptadores, con el propósito de permitir realizar una gestión de franjas horarias.
 
@@ -16,8 +15,8 @@ Proyecto para el curso de Arquitectura de Software para Aplicaciones Empresarial
 * Validaciones automáticas de disponibilidad
 
 ## Tecnologías Utilizadas 🛠️
-* Java 17
-* Spring Boot 3.x
+* JDK 17
+* Spring Boot 3.3.5
 * Hibernate JPA
 * Base de datos MySQL
 * Maven
@@ -83,8 +82,9 @@ spring.datasource.password=tu_contraseña
 ## Ejemplos de Uso 📝
 
 ### Crear Docente
+Endpoint: `POST /api/docentes`
+
 ```json
-POST /api/docentes
 {
   "nombres": "Juan",
   "apellidos": "Pérez",
@@ -97,8 +97,9 @@ POST /api/docentes
 ```
 
 ### Crear Franja Horaria
+Endpoint: `POST /api/franjas`
+
 ```json
-POST /api/franjas
 {
   "dia": "LUNES",
   "horaInicio": "07:00",
