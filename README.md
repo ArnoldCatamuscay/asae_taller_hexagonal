@@ -1,8 +1,6 @@
 # API para la Gestión de franjas horarias FIET 
 ![Static Badge](https://img.shields.io/badge/Spring%20Boot-3.3.5-1b1f23?style=for-the-badge&logo=spring%20boot&logoColor=white&labelColor=6cb52d) ![Static Badge](https://img.shields.io/badge/JDK-17-1b1f23?style=for-the-badge&logo=openjdk&logoColor=white&labelColor=orange) ![Static Badge](https://img.shields.io/badge/MySQL-4d7ca0?style=for-the-badge&logo=mysql&logoColor=white) 
 
-![Static Badge](https://img.shields.io/badge/Spring%20Boot-3.3.5-1b1f23?style=plastic&logo=spring%20boot&logoColor=white&labelColor=6cb52d) ![Static Badge](https://img.shields.io/badge/JDK-17-1b1f23?style=plastic&logo=openjdk&logoColor=white&labelColor=orange) ![Static Badge](https://img.shields.io/badge/MySQL-4d7ca0?style=plastic&logo=mysql&logoColor=white) 
-
 Proyecto para el curso de Arquitectura de Software para Aplicaciones Empresariales que consiste de un backend en Spring Boot, empleando Arquitectura Hexagonal o de Puertos y Adaptadores, con el propósito de permitir realizar una gestión de franjas horarias.
 
 
@@ -61,7 +59,8 @@ src
 
 Configurar la base de datos en `application.properties`:
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/fiet_horarios
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost/bd_nombre?useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true
 spring.datasource.username=tu_usuario
 spring.datasource.password=tu_contraseña
 ```
