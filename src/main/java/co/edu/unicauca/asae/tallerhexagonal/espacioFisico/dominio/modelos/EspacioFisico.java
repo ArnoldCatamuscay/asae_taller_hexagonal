@@ -11,4 +11,5 @@ public class EspacioFisico {
     private Integer id;
     private String nombre;
     private Integer capacidad;
+
 }
