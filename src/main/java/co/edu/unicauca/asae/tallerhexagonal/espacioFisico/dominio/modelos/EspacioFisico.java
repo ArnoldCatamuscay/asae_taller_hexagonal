@@ -12,4 +12,7 @@ public class EspacioFisico {
     private String nombre;
     private Integer capacidad;
 
+    public EspacioFisico(Integer id) {
+        this.id = id;
+    }
 }

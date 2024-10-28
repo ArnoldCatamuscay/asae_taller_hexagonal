@@ -10,4 +10,5 @@ public interface GestionarEspacioFisicoGatewayIntPort {
 
 	Boolean isEspacioFisicoOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, Integer id);
 
+	EspacioFisico findById(Integer id);
 }

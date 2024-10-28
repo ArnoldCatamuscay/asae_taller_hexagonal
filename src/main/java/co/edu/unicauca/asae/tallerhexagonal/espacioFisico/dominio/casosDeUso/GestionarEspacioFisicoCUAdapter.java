@@ -5,7 +5,6 @@ import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.Espa
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.dominio.modelos.EspacioFisico;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 

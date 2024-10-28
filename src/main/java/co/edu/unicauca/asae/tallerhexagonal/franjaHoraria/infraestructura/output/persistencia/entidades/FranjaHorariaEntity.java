@@ -39,7 +39,7 @@ public class FranjaHorariaEntity {
     @JoinColumn(name = "idCurso", nullable = false)
     private CursoEntity objCurso;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Contradicción en los métodos 4 y 5
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEspacioFisico", nullable = false)
     private EspacioFisicoEntity objEspacioFisico;
 

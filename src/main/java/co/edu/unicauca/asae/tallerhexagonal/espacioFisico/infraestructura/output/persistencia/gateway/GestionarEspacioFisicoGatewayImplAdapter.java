@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspacioFisicoGatewayIntPort {
@@ -45,6 +46,17 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
 	public Boolean isEspacioFisicoOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, Integer id) {
 		Integer count = objEspacioFisicoRepository.isEspacioFisicoOccupied(dia, horaInicio, horaFin, id);
 		return count > 0;
+	}
+
+	@Override
+	public EspacioFisico findById(Integer id) {
+		Optional<EspacioFisicoEntity> objEspacioFisico = null;
+		objEspacioFisico = objEspacioFisicoRepository.findById(id);
+		if (!objEspacioFisico.isPresent()) {
+			return null;
+		}
+		EspacioFisico objEspacio = this.espacioFisicoModelMapper.map(objEspacioFisico.get(), EspacioFisico.class);
+		return objEspacio;
 	}
 
 }

@@ -12,4 +12,8 @@ public class Curso {
 
     private String nombre;
 
+    public Curso(Integer id) {
+        this.id = id;
+    }
+
 }
