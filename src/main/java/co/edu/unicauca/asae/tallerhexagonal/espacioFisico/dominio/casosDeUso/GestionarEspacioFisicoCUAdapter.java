@@ -5,6 +5,8 @@ import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.Espa
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.dominio.modelos.EspacioFisico;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class GestionarEspacioFisicoCUAdapter implements GestionarEspacioFisicoCUIntPort {
@@ -13,16 +15,20 @@ public class GestionarEspacioFisicoCUAdapter implements GestionarEspacioFisicoCU
 	private final EspacioFisicoFormateadorResultadosIntPort objEspacioFisicoFormateadorResultados;
 
 	public GestionarEspacioFisicoCUAdapter(
-		GestionarEspacioFisicoGatewayIntPort objGestionarEspacioFisicoGateway,
-		EspacioFisicoFormateadorResultadosIntPort objEspacioFisicoFormateadorResultados
-	) {
+			GestionarEspacioFisicoGatewayIntPort objGestionarEspacioFisicoGateway,
+			EspacioFisicoFormateadorResultadosIntPort objEspacioFisicoFormateadorResultados) {
 		this.objGestionarEspacioFisicoGateway = objGestionarEspacioFisicoGateway;
 		this.objEspacioFisicoFormateadorResultados = objEspacioFisicoFormateadorResultados;
 	}
 
 	@Override
 	public List<EspacioFisico> listar() {
-		// TODO Auto-generated method stub
-		return List.of();
+		List<EspacioFisico> listaObtenida = objGestionarEspacioFisicoGateway.listar();
+		return listaObtenida;
+	}
+
+	@Override
+	public Boolean isEspacioFisicoOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, Integer id) {
+		return objGestionarEspacioFisicoGateway.isEspacioFisicoOccupied(dia, horaInicio, horaFin, id);
 	}
 }
