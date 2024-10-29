@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.output.persistencia.entidades.FranjaHorariaEntity;
 
-public interface FranjaHorariaRepositorioInt extends CrudRepository<FranjaHorariaEntity, Integer> {
+public interface FranjaHorariaRepositoryInt extends CrudRepository<FranjaHorariaEntity, Integer> {
 
 }

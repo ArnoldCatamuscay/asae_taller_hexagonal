@@ -6,18 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class FranjaHorariaDTOPeticion {
+public record FranjaHorariaDTOPeticion (
 
-    private String dia;
+    String dia,
 
-    private LocalTime horaInicio;
+    LocalTime horaInicio,
 
-    private LocalTime horaFin;
+    LocalTime horaFin,
 
-    private Integer idCurso;
+    Integer idCurso,
 
-    private Integer idEspacioFisico;
-}
+    Integer idEspacioFisico
+) {}

@@ -12,8 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,19 +21,22 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Asignaturas")
 public class AsignaturaEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(length = 255, nullable = false)
-    private String nombre;
-    @Column(length = 50)
-    private String codigo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@Column(length = 255, nullable = false)
+	private String nombre;
+	@Column(length = 50)
+	private String codigo;
 
-    // * Relación */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAsignatura")
-    private List<CursoEntity> cursos;
+	// * Relación */
+	@OneToMany(
+		fetch = FetchType.LAZY,
+		mappedBy = "objAsignatura"
+	)
+	private Set<CursoEntity> cursos;
 
-    public AsignaturaEntity() {
-        this.cursos = new ArrayList<CursoEntity>();
-    }
+	public AsignaturaEntity() {
+		this.cursos = new HashSet<>();
+	}
 }

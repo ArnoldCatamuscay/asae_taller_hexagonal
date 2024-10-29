@@ -13,9 +13,9 @@ public class GestionarFranjaHorariaCUAdapter implements GestionarFranjaHorariaCU
     private final FranjaHorariaFormateadorResultadosIntPort objEspacioFisicoFormateadorResultados;
 
     @Override
-    public FranjaHoraria crearFranjaHoraria(FranjaHoraria objFranjaHoraria) {
+    public FranjaHoraria crear(FranjaHoraria objFranjaHoraria) {
         FranjaHoraria objFranjaHorariaCreado = null;
-        objFranjaHorariaCreado = this.objGestionarFranjaHorariaGateway.crearFranjaHoraria(objFranjaHoraria);
+        objFranjaHorariaCreado = this.objGestionarFranjaHorariaGateway.guardar(objFranjaHoraria);
         return objFranjaHorariaCreado;
     }
 }

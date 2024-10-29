@@ -12,6 +12,8 @@ public class Curso {
 
     private String nombre;
 
+    // Constructor para el mapeo
+    // en FranjaHorariaMapperInfraestructuraDominio
     public Curso(Integer id) {
         this.id = id;
     }

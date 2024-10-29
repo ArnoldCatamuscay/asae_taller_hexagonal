@@ -6,10 +6,12 @@ import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.infraestructura.input.
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface EspacioFisicoMapperInfraestructuraDominio {
-	// TODO: Implementar los métodos de mapeo
+
+	EspacioFisicoDTORespuesta mappearDeEspacioFisicoARespuesta(EspacioFisico espacioFisico);
 
 	List<EspacioFisicoDTORespuesta> mappearDeEspaciosFisicosARespuesta(List<EspacioFisico> espacioFisicos);
 }

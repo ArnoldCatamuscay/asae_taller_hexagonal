@@ -4,5 +4,5 @@ import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.modelos.Franja
 
 public interface GestionarFranjaHorariaCUIntPort {
 
-    public FranjaHoraria crearFranjaHoraria(FranjaHoraria objFranjaHoraria);
+    FranjaHoraria crear(FranjaHoraria objFranjaHoraria);
 }

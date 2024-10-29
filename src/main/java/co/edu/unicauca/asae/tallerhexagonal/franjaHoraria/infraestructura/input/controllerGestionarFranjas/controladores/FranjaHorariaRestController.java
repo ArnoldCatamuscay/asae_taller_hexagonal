@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/api/franjaHoraria")
+@RequestMapping("/api/franjas-horarias")
 @RequiredArgsConstructor
 public class FranjaHorariaRestController {
     private final GestionarFranjaHorariaCUIntPort objGestionarFranjaHorariaCUInt;
@@ -23,9 +23,10 @@ public class FranjaHorariaRestController {
 
     @PostMapping("/")
     public ResponseEntity<FranjaHorariaDTORespuesta> crearFranjaHoraria(
-            @RequestBody FranjaHorariaDTOPeticion objFranjaHoraria) {
+        @RequestBody FranjaHorariaDTOPeticion objFranjaHoraria
+    ) {
         FranjaHoraria objFranjaHorariaCrear = objMapeador.mappearDePeticionAFranjaHoraria(objFranjaHoraria);
-        FranjaHoraria objFranjaHorariaCreado = objGestionarFranjaHorariaCUInt.crearFranjaHoraria(objFranjaHorariaCrear);
+        FranjaHoraria objFranjaHorariaCreado = objGestionarFranjaHorariaCUInt.crear(objFranjaHorariaCrear);
         ResponseEntity<FranjaHorariaDTORespuesta> objRespuesta = new ResponseEntity<FranjaHorariaDTORespuesta>(
                 objMapeador.mappearDeFranjaHorariaARespuesta(objFranjaHorariaCreado),
                 HttpStatus.CREATED);

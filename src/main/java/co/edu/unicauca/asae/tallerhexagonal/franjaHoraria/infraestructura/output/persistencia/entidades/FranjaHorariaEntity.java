@@ -24,23 +24,23 @@ import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.infraestructura.output
 @AllArgsConstructor
 @Table(name = "FranjasHorarias")
 public class FranjaHorariaEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(length = 20, nullable = false)
-    private String dia;
-    @Column(nullable = false)
-    private LocalTime horaInicio;
-    @Column(nullable = false)
-    private LocalTime horaFin;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@Column(length = 20, nullable = false)
+	private String dia;
+	@Column(nullable = false)
+	private LocalTime horaInicio;
+	@Column(nullable = false)
+	private LocalTime horaFin;
 
-    // * Relaciones */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idCurso", nullable = false)
-    private CursoEntity objCurso;
+	// * Relaciones */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCurso", nullable = false)
+	private CursoEntity objCurso;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idEspacioFisico", nullable = false)
-    private EspacioFisicoEntity objEspacioFisico;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idEspacioFisico", nullable = false)
+	private EspacioFisicoEntity objEspacioFisico;
 
 }

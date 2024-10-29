@@ -1,7 +1,9 @@
 package co.edu.unicauca.asae.tallerhexagonal.espacioFisico.infraestructura.output.persistencia.entidades;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.output.persistencia.entidades.FranjaHorariaEntity;
 import jakarta.persistence.Column;
@@ -31,9 +33,9 @@ public class EspacioFisicoEntity {
 
     // * Relación */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objEspacioFisico")
-    private List<FranjaHorariaEntity> franjasHorario;
+    private Set<FranjaHorariaEntity> franjasHorario;
 
     public EspacioFisicoEntity() {
-        this.franjasHorario = new ArrayList<FranjaHorariaEntity>();
+        this.franjasHorario = new HashSet<>();
     }
 }

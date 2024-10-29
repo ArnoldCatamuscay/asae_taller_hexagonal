@@ -28,25 +28,29 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "Cursos")
 public class CursoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(length = 255, nullable = false)
-    private String nombre;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@Column(length = 255, nullable = false)
+	private String nombre;
 
-    // * Relaciones */
-    @ManyToOne
-    @JoinColumn(name = "idAsignatura", nullable = false)
-    private AsignaturaEntity objAsignatura;
+	// * Relaciones */
+	@ManyToOne
+	@JoinColumn(name = "idAsignatura", nullable = false)
+	private AsignaturaEntity objAsignatura;
 
-    @OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.EAGER, mappedBy = "objCurso")
-    private List<FranjaHorariaEntity> franjasHorario;
+	@OneToMany(
+		cascade = { CascadeType.REMOVE },
+		fetch = FetchType.EAGER,
+		mappedBy = "objCurso"
+	)
+	private Set<FranjaHorariaEntity> franjasHorario;
 
-    @ManyToMany(mappedBy = "cursos")
-    private Set<DocenteEntity> docentes;
+	@ManyToMany(mappedBy = "cursos")
+	private Set<DocenteEntity> docentes;
 
-    public CursoEntity() {
-        this.franjasHorario = new ArrayList<FranjaHorariaEntity>();
-        this.docentes = new HashSet<DocenteEntity>();
-    }
+	public CursoEntity() {
+		this.franjasHorario = new HashSet<>();
+		this.docentes = new HashSet<>();
+	}
 }

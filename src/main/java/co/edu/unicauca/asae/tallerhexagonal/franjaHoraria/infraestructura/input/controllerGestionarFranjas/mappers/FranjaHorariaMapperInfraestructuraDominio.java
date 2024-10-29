@@ -13,14 +13,13 @@ import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.input.
 @Mapper(componentModel = "spring")
 public interface FranjaHorariaMapperInfraestructuraDominio {
 
-    // Mapea la petición a la clase de dominio FranjaHoraria
     @Mapping(target = "curso", source = "idCurso", qualifiedByName = "idToCurso")
     @Mapping(target = "espacioFisico", source = "idEspacioFisico", qualifiedByName = "idToEspacioFisico")
     FranjaHoraria mappearDePeticionAFranjaHoraria(FranjaHorariaDTOPeticion peticion);
 
     FranjaHorariaDTORespuesta mappearDeFranjaHorariaARespuesta(FranjaHoraria franjaHoraria);
 
-    // Métodos de conversión de ID a objeto de dominio
+    // Métodos de conversión de IDs a objetos de dominio
     @Named("idToCurso")
     default Curso idToCurso(Integer idCurso) {
         return idCurso != null ? new Curso(idCurso) : null;

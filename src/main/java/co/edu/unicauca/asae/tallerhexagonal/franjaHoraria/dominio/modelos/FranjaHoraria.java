@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class FranjaHoraria {
     private Integer id;
 
@@ -22,4 +21,6 @@ public class FranjaHoraria {
     private Curso curso;
 
     private EspacioFisico espacioFisico;
+
+    public FranjaHoraria() {}
 }
