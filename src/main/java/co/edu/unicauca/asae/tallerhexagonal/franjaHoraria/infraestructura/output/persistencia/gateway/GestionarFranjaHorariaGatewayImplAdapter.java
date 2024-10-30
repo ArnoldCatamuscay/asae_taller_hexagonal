@@ -1,6 +1,9 @@
 package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.output.persistencia.gateway;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.asae.tallerhexagonal.commons.controladorExcepciones.excepcionesPropias.ReglaNegocioException;
@@ -83,6 +86,18 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
 		);
 
 		return objFranjaHorariaRespuesta;
+	}
+
+	@Override
+	public List<FranjaHoraria> listarPorDocente(Integer idDocente) {
+		List<FranjaHorariaEntity> franjasHorariasEntity = this.objFranjaHorariaRepository
+			.findByDocenteId(idDocente);
+		List<FranjaHoraria> franjasHorarias = this.franjaHorariaModelMapper.map(
+			franjasHorariasEntity,
+			new TypeToken<List<FranjaHoraria>>() {
+			}.getType()
+		);
+		return franjasHorarias;
 	}
 
 }

@@ -1,5 +1,7 @@
 package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.casosDeUso;
 
+import java.util.List;
+
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.input.GestionarFranjaHorariaCUIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.output.FranjaHorariaFormateadorResultadosIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.output.GestionarFranjaHorariaGatewayIntPort;
@@ -17,5 +19,11 @@ public class GestionarFranjaHorariaCUAdapter implements GestionarFranjaHorariaCU
         FranjaHoraria objFranjaHorariaCreado = null;
         objFranjaHorariaCreado = this.objGestionarFranjaHorariaGateway.guardar(objFranjaHoraria);
         return objFranjaHorariaCreado;
+    }
+
+    @Override
+    public List<FranjaHoraria> listarPorDocente(Integer idDocente) {
+        List<FranjaHoraria> franjasHorarias = this.objGestionarFranjaHorariaGateway.listarPorDocente(idDocente);
+        return franjasHorarias;
     }
 }

@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.input
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import java.util.List;
 
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.dominio.modelos.EspacioFisico;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.modelos.Curso;
@@ -29,4 +30,6 @@ public interface FranjaHorariaMapperInfraestructuraDominio {
     default EspacioFisico idToEspacioFisico(Integer idEspacioFisico) {
         return idEspacioFisico != null ? new EspacioFisico(idEspacioFisico) : null;
     }
+
+    List<FranjaHorariaDTORespuesta> mappearDeFranjaHorariaARespuesta(List<FranjaHoraria> franjasHorarias);
 }
