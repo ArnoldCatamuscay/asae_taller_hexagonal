@@ -6,7 +6,6 @@ import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.infraestructura.input.
 import java.util.List;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface EspacioFisicoMapperInfraestructuraDominio {

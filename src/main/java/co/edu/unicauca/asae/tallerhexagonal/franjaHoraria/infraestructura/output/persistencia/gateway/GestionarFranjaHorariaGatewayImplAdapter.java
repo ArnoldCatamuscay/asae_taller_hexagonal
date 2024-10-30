@@ -3,6 +3,9 @@ package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.outpu
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import co.edu.unicauca.asae.tallerhexagonal.commons.controladorExcepciones.excepcionesPropias.ReglaNegocioException;
+import co.edu.unicauca.asae.tallerhexagonal.docente.aplicacion.output.GestionarDocenteGatewayIntPort;
+import co.edu.unicauca.asae.tallerhexagonal.docente.infraestructura.output.persistencia.entidades.DocenteEntity;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.dominio.modelos.EspacioFisico;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.infraestructura.output.persistencia.entidades.EspacioFisicoEntity;
@@ -21,17 +24,20 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
 	private final ModelMapper franjaHorariaModelMapper;
 	private final GestionarEspacioFisicoGatewayIntPort objGestionarEspacioFisicoGatewayIntPort;
 	private final GestionarCursoGatewayIntPort objGestionarCursoGatewayIntPort;
+	private final GestionarDocenteGatewayIntPort objGestionarDocenteGatewayIntPort;
 
 	public GestionarFranjaHorariaGatewayImplAdapter(
 		FranjaHorariaRepositoryInt objFranjaHorariaRepository,
 		ModelMapper franjaHorariaModelMapper,
 		GestionarEspacioFisicoGatewayIntPort objGestionarEspacioFisicoGatewayIntPort,
-		GestionarCursoGatewayIntPort objGestionarCursoGatewayIntPort
+		GestionarCursoGatewayIntPort objGestionarCursoGatewayIntPort,
+		GestionarDocenteGatewayIntPort objGestionarDocenteGatewayIntPort
 	) {
 		this.objFranjaHorariaRepository = objFranjaHorariaRepository;
 		this.franjaHorariaModelMapper = franjaHorariaModelMapper;
 		this.objGestionarEspacioFisicoGatewayIntPort = objGestionarEspacioFisicoGatewayIntPort;
 		this.objGestionarCursoGatewayIntPort = objGestionarCursoGatewayIntPort;
+		this.objGestionarDocenteGatewayIntPort = objGestionarDocenteGatewayIntPort;
 	}
 
 	@Override
@@ -50,6 +56,24 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
 
 		objFranjaHorariaEntity.setObjCurso(objCursoEntity);
 		objFranjaHorariaEntity.setObjEspacioFisico(objEspacioFisicoEntity);
+
+		// Validar que el espacio físico no esté ocupado
+		if(this.objGestionarEspacioFisicoGatewayIntPort.isEspacioFisicoOccupied(objFranjaHoraria.getDia(),
+			objFranjaHoraria.getHoraInicio(),
+			objFranjaHoraria.getHoraFin(),
+			objEspacioFisicoEntity.getId())) {
+			throw new ReglaNegocioException("El espacio físico ya está ocupado en ese horario");
+		}
+		
+		// Validar que el docente no esté ocupado
+		for (DocenteEntity objDocenteEntity : objCursoEntity.getDocentes()) {
+			if(objGestionarDocenteGatewayIntPort.isDocenteOccupied(objFranjaHoraria.getDia(),
+			objFranjaHoraria.getHoraInicio(),
+			objFranjaHoraria.getHoraFin(),
+			objDocenteEntity.getIdPersona())){
+				throw new ReglaNegocioException("El docente ya tiene una franja horaria asignada en ese horario");
+			}
+		}
 
 		FranjaHorariaEntity objFranjaHorariaEntityRegistrado = this.objFranjaHorariaRepository
 			.save(objFranjaHorariaEntity);

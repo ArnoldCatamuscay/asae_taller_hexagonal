@@ -24,6 +24,7 @@ public class OficinaEntity {
     private int idOficina;
     @Column(nullable = false, length = 20)
     private String nombre;
+    @Column(nullable = false, length = 50)
     private String ubicacion;
 
     @OneToOne(mappedBy = "objOficina")

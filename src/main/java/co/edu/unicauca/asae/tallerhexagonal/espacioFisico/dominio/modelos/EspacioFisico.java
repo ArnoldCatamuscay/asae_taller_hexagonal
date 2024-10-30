@@ -1,11 +1,9 @@
 package co.edu.unicauca.asae.tallerhexagonal.espacioFisico.dominio.modelos;
 
-import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.modelos.FranjaHoraria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
 
 @Data
 @AllArgsConstructor

@@ -22,9 +22,7 @@ public class FranjaHorariaRestController {
     private final FranjaHorariaMapperInfraestructuraDominio objMapeador;
 
     @PostMapping("/")
-    public ResponseEntity<FranjaHorariaDTORespuesta> crearFranjaHoraria(
-        @RequestBody FranjaHorariaDTOPeticion objFranjaHoraria
-    ) {
+    public ResponseEntity<FranjaHorariaDTORespuesta> crearFranjaHoraria(@RequestBody FranjaHorariaDTOPeticion objFranjaHoraria) {
         FranjaHoraria objFranjaHorariaCrear = objMapeador.mappearDePeticionAFranjaHoraria(objFranjaHoraria);
         FranjaHoraria objFranjaHorariaCreado = objGestionarFranjaHorariaCUInt.crear(objFranjaHorariaCrear);
         ResponseEntity<FranjaHorariaDTORespuesta> objRespuesta = new ResponseEntity<FranjaHorariaDTORespuesta>(
