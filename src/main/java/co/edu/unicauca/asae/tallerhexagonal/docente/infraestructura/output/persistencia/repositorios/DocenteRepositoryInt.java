@@ -10,15 +10,14 @@ import co.edu.unicauca.asae.tallerhexagonal.docente.infraestructura.output.persi
 
 public interface DocenteRepositoryInt extends CrudRepository<DocenteEntity, Integer> {
     @Query(value = """
-            SELECT CASE WHEN COUNT(*) > 0 THEN TRUE ELSE FALSE END 
+            SELECT COUNT(*) > 0
             FROM FranjasHorarias fh
             JOIN Cursos c ON fh.idCurso = c.id
             JOIN curso_docente cd ON c.id = cd.idCurso
             WHERE cd.idDocente = :idDocente
               AND fh.dia = :dia
-              AND (:horaInicio BETWEEN fh.horaInicio AND fh.horaFin 
-                   OR :horaFin BETWEEN fh.horaInicio AND fh.horaFin
-                   OR fh.horaInicio BETWEEN :horaInicio AND :horaFin)
+              AND fh.horaInicio < :horaFin
+              AND fh.horaFin > :horaInicio
             """, nativeQuery = true)
     int isDocenteOcupado(@Param("dia") String dia,
                              @Param("horaInicio") LocalTime horaInicio,

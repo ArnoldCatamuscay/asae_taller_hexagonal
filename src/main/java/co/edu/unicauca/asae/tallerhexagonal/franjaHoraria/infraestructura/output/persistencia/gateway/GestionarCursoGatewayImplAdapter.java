@@ -11,11 +11,11 @@ import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.output
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.output.persistencia.repositorios.CursoRepositoryInt;
 
 @Service
-public class GestionarCursoImplAdapter implements GestionarCursoGatewayIntPort {
+public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIntPort {
     private final CursoRepositoryInt objCursoRepository;
     private final ModelMapper cursoModelMapper;
 
-    public GestionarCursoImplAdapter(CursoRepositoryInt objCursoRepository, ModelMapper cursoModelMapper) {
+    public GestionarCursoGatewayImplAdapter(CursoRepositoryInt objCursoRepository, ModelMapper cursoModelMapper) {
         this.objCursoRepository = objCursoRepository;
         this.cursoModelMapper = cursoModelMapper;
     }
@@ -23,10 +23,7 @@ public class GestionarCursoImplAdapter implements GestionarCursoGatewayIntPort {
     @Override
     public Curso findById(Integer id) {
         Optional<CursoEntity> objCursoEntity = objCursoRepository.findById(id);
-        //TODO: Usar excepcion, EntidaYaExisteException
-        if (objCursoEntity.isEmpty()) {
-            return null;
-        }
+        
         Curso objCurso = this.cursoModelMapper.map(objCursoEntity.get(), Curso.class);
         return objCurso;
     }

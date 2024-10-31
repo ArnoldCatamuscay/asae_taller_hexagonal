@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-import co.edu.unicauca.asae.tallerhexagonal.commons.controladorExcepciones.excepcionesPropias.ReglaNegocioException;
 import co.edu.unicauca.asae.tallerhexagonal.docente.aplicacion.output.GestionarDocenteGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.docente.infraestructura.output.persistencia.entidades.DocenteEntity;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
@@ -52,52 +51,51 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
 
 		Curso objCurso = this.objGestionarCursoGatewayIntPort.findById(objFranjaHoraria.getCurso().getId());
 		CursoEntity objCursoEntity = this.franjaHorariaModelMapper.map(objCurso, CursoEntity.class);
-		EspacioFisico objEspacioFisico = this.objGestionarEspacioFisicoGatewayIntPort
-			.findById(objFranjaHoraria.getEspacioFisico().getId());
-		EspacioFisicoEntity objEspacioFisicoEntity = this.franjaHorariaModelMapper.map(objEspacioFisico,
-			EspacioFisicoEntity.class);
+		EspacioFisico objEspacioFisico = this.objGestionarEspacioFisicoGatewayIntPort.findById(objFranjaHoraria.getEspacioFisico().getId());
+		EspacioFisicoEntity objEspacioFisicoEntity = this.franjaHorariaModelMapper.map(objEspacioFisico,EspacioFisicoEntity.class);
 
 		objFranjaHorariaEntity.setObjCurso(objCursoEntity);
 		objFranjaHorariaEntity.setObjEspacioFisico(objEspacioFisicoEntity);
 
-		// Validar que el espacio físico no esté ocupado
-		if(this.objGestionarEspacioFisicoGatewayIntPort.isEspacioFisicoOccupied(objFranjaHoraria.getDia(),
-			objFranjaHoraria.getHoraInicio(),
-			objFranjaHoraria.getHoraFin(),
-			objEspacioFisicoEntity.getId())) {
-			throw new ReglaNegocioException("El espacio físico ya está ocupado en ese horario");
-		}
-		
-		// Validar que el docente no esté ocupado
-		for (DocenteEntity objDocenteEntity : objCursoEntity.getDocentes()) {
-			if(objGestionarDocenteGatewayIntPort.isDocenteOccupied(objFranjaHoraria.getDia(),
-			objFranjaHoraria.getHoraInicio(),
-			objFranjaHoraria.getHoraFin(),
-			objDocenteEntity.getIdPersona())){
-				throw new ReglaNegocioException("El docente ya tiene una franja horaria asignada en ese horario");
-			}
-		}
-
-		FranjaHorariaEntity objFranjaHorariaEntityRegistrado = this.objFranjaHorariaRepository
-			.save(objFranjaHorariaEntity);
-		FranjaHoraria objFranjaHorariaRespuesta = this.franjaHorariaModelMapper.map(
-			objFranjaHorariaEntityRegistrado,
-			FranjaHoraria.class
-		);
+		FranjaHorariaEntity objFranjaHorariaEntityRegistrado = this.objFranjaHorariaRepository.save(objFranjaHorariaEntity);
+		FranjaHoraria objFranjaHorariaRespuesta = this.franjaHorariaModelMapper.map(objFranjaHorariaEntityRegistrado,FranjaHoraria.class);
 
 		return objFranjaHorariaRespuesta;
 	}
 
 	@Override
 	public List<FranjaHoraria> listarPorDocente(Integer idDocente) {
-		List<FranjaHorariaEntity> franjasHorariasEntity = this.objFranjaHorariaRepository
-			.findByDocenteId(idDocente);
-		List<FranjaHoraria> franjasHorarias = this.franjaHorariaModelMapper.map(
-			franjasHorariasEntity,
-			new TypeToken<List<FranjaHoraria>>() {
-			}.getType()
+		List<FranjaHorariaEntity> franjasHorariasEntity = this.objFranjaHorariaRepository.findByDocenteId(idDocente);
+		List<FranjaHoraria> franjasHorarias = this.franjaHorariaModelMapper.map(franjasHorariasEntity,
+			new TypeToken<List<FranjaHoraria>>() {}.getType()
 		);
 		return franjasHorarias;
+	}
+
+	@Override
+	public Boolean espacioFisicoOcupado(FranjaHoraria objFranjaHoraria) {
+		EspacioFisico objEspacioFisico = this.objGestionarEspacioFisicoGatewayIntPort.findById(objFranjaHoraria.getEspacioFisico().getId());
+		EspacioFisicoEntity objEspacioFisicoEntity = this.franjaHorariaModelMapper.map(objEspacioFisico,EspacioFisicoEntity.class);
+	
+		if(this.objGestionarEspacioFisicoGatewayIntPort.isEspacioFisicoOccupied(objFranjaHoraria.getDia(),
+			objFranjaHoraria.getHoraInicio(),objFranjaHoraria.getHoraFin(),objEspacioFisicoEntity.getId())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean docenteOcupado(FranjaHoraria objFranjaHoraria) {
+		Curso objCurso = this.objGestionarCursoGatewayIntPort.findById(objFranjaHoraria.getCurso().getId());
+		CursoEntity objCursoEntity = this.franjaHorariaModelMapper.map(objCurso, CursoEntity.class);
+	
+		for (DocenteEntity objDocenteEntity : objCursoEntity.getDocentes()) {
+			if(objGestionarDocenteGatewayIntPort.isDocenteOccupied(objFranjaHoraria.getDia(),
+				objFranjaHoraria.getHoraInicio(),objFranjaHoraria.getHoraFin(),objDocenteEntity.getIdPersona())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

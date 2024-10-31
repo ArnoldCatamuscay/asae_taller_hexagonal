@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanConfigurations {
 
-	//TODO: Crear Bean para el CU de Docentes
 	@Bean
 	public GestionarDocenteCUAdapter crearGestionarDocenteCUInt(
 		GestionarDocenteGatewayIntPort objGestionarDocenteGateway,

@@ -12,11 +12,17 @@ import lombok.RequiredArgsConstructor;
 public class GestionarFranjaHorariaCUAdapter implements GestionarFranjaHorariaCUIntPort {
 
     private final GestionarFranjaHorariaGatewayIntPort objGestionarFranjaHorariaGateway;
-    private final FranjaHorariaFormateadorResultadosIntPort objEspacioFisicoFormateadorResultados;
+    private final FranjaHorariaFormateadorResultadosIntPort objFranjaHorariaFormateadorResultados;
 
     @Override
     public FranjaHoraria crear(FranjaHoraria objFranjaHoraria) {
         FranjaHoraria objFranjaHorariaCreado = null;
+        if(this.objGestionarFranjaHorariaGateway.docenteOcupado(objFranjaHoraria)){
+            this.objFranjaHorariaFormateadorResultados.retornarRespuestaErrorReglaDeNegocio("Error, el docente ya tiene una franja horaria asignada en ese horario");
+        }
+        if(this.objGestionarFranjaHorariaGateway.espacioFisicoOcupado(objFranjaHoraria)){
+            this.objFranjaHorariaFormateadorResultados.retornarRespuestaErrorReglaDeNegocio("Error, el espacio físico ya está ocupado en ese horario");
+        }
         objFranjaHorariaCreado = this.objGestionarFranjaHorariaGateway.guardar(objFranjaHoraria);
         return objFranjaHorariaCreado;
     }

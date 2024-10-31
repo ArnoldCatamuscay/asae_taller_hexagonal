@@ -2,6 +2,8 @@ package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.outpu
 
 import org.springframework.stereotype.Service;
 
+import co.edu.unicauca.asae.tallerhexagonal.commons.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
+import co.edu.unicauca.asae.tallerhexagonal.commons.controladorExcepciones.excepcionesPropias.ReglaNegocioException;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.output.FranjaHorariaFormateadorResultadosIntPort;
 
 @Service
@@ -9,14 +11,14 @@ public class FranjaHorariaFormateadorResultadosImplAdapter implements FranjaHora
 
     @Override
     public void retornarRespuestaErrorEntidadExiste(String mensaje) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retornarRespuestaErrorEntidadExiste'");
+        EntidadYaExisteException objException = new EntidadYaExisteException(mensaje);
+        throw objException;
     }
 
     @Override
     public void retornarRespuestaErrorReglaDeNegocio(String mensaje) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retornarRespuestaErrorReglaDeNegocio'");
+        ReglaNegocioException objException = new ReglaNegocioException(mensaje);
+        throw objException;
     }
 
 }

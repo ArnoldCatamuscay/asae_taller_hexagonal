@@ -13,8 +13,7 @@ public class EspacioFisico {
     private String nombre;
     private Integer capacidad;
 
-    // Constructor para el mapeo
-    // en FranjaHorariaMapperInfraestructuraDominio
+    // Constructor para el mapeo en FranjaHorariaMapperInfraestructuraDominio
     public EspacioFisico(Integer id) {
         this.id = id;
     }
