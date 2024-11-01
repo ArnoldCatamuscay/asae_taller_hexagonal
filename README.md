@@ -73,3 +73,6 @@ Endpoint: `POST localhost:5000/api/franjas-horarias/`
 
 ### Listar Franjas Horarias por Docente
 Endpoint: `GET localhost:5000/api/franjas-horarias/listarPorDocente/1`
+
+### Listar Espacios físicos
+Endpoint: `GET localhost:5000/api/espacios-fisicos/?patron=sa&capacidad=25`
