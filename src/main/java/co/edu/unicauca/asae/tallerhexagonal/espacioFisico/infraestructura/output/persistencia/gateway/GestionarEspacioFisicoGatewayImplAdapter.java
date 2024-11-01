@@ -48,11 +48,14 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
 	@Override
 	public EspacioFisico findById(Integer id) {
 		Optional<EspacioFisicoEntity> espacioFisicoBuscado = objEspacioFisicoRepository.findById(id);
-		
-		EspacioFisico espacioFisicoEncontrado = this.espacioFisicoModelMapper.map(
-			espacioFisicoBuscado.get(),
-			EspacioFisico.class
-		);
+		if(espacioFisicoBuscado.isEmpty()) {
+			return null;
+		}
+
+		EspacioFisico espacioFisicoEncontrado = new EspacioFisico();
+		espacioFisicoEncontrado.setId(espacioFisicoBuscado.get().getId());
+		espacioFisicoEncontrado.setNombre(espacioFisicoBuscado.get().getNombre());
+		espacioFisicoEncontrado.setCapacidad(espacioFisicoBuscado.get().getCapacidad());
 
 		return espacioFisicoEncontrado;
 	}

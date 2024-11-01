@@ -46,7 +46,8 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
 
     @Override
     public Boolean isDocenteOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, int idDocente) {
-        return this.objDocenteRepository.isDocenteOcupado(dia, horaInicio, horaFin, idDocente)==1;
+        int cont = this.objDocenteRepository.isDocenteOcupado(dia, horaInicio, horaFin, idDocente);
+        return cont>0;
     }
 
     @Override

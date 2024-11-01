@@ -7,6 +7,7 @@ import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.Espa
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.espacioFisico.dominio.casosDeUso.GestionarEspacioFisicoCUAdapter;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.output.FranjaHorariaFormateadorResultadosIntPort;
+import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.output.GestionarCursoGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.aplicacion.output.GestionarFranjaHorariaGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.casosDeUso.GestionarFranjaHorariaCUAdapter;
 import org.springframework.context.annotation.Bean;
@@ -42,11 +43,15 @@ public class BeanConfigurations {
 	@Bean
 	public GestionarFranjaHorariaCUAdapter crearGestionarFranjaHorariaCUInt(
 		GestionarFranjaHorariaGatewayIntPort objGestionarFranjaHorariaGateway,
-		FranjaHorariaFormateadorResultadosIntPort objFranjaHorariaFormateadorResultados
+		FranjaHorariaFormateadorResultadosIntPort objFranjaHorariaFormateadorResultados,
+		GestionarCursoGatewayIntPort objGestionarCursoGateway,
+		GestionarEspacioFisicoGatewayIntPort objGestionarEspacioFisicoGateway
 	) {
 		GestionarFranjaHorariaCUAdapter objGestionarFranjaHorariaCU = new GestionarFranjaHorariaCUAdapter(
 			objGestionarFranjaHorariaGateway,
-			objFranjaHorariaFormateadorResultados
+			objFranjaHorariaFormateadorResultados,
+			objGestionarCursoGateway,
+			objGestionarEspacioFisicoGateway
 		);
 		return objGestionarFranjaHorariaCU;
 	}

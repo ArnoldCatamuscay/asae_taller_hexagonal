@@ -17,9 +17,9 @@ public class FranjaHoraria {
 
     private LocalTime horaFin;
 
-    private Curso curso;
+    private Curso objCurso;
 
-    private EspacioFisico espacioFisico;
+    private EspacioFisico objEspacioFisico;
 
     public FranjaHoraria() {}
 }

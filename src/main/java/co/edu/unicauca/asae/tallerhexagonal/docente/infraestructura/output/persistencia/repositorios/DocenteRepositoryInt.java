@@ -10,7 +10,7 @@ import co.edu.unicauca.asae.tallerhexagonal.docente.infraestructura.output.persi
 
 public interface DocenteRepositoryInt extends CrudRepository<DocenteEntity, Integer> {
     @Query(value = """
-            SELECT COUNT(*) > 0
+            SELECT COUNT(*) 
             FROM FranjasHorarias fh
             JOIN Cursos c ON fh.idCurso = c.id
             JOIN curso_docente cd ON c.id = cd.idCurso

@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.modelos;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import co.edu.unicauca.asae.tallerhexagonal.docente.dominio.modelos.Docente;
@@ -15,9 +16,9 @@ public class Curso {
 
     private String nombre;
 
-    private Set<Docente> docentes;
-
-    // private Asignatura objAsignatura;
+    private Asignatura objAsignatura;
+    
+    private Set<Docente> docentes = new HashSet<>();
 
     // Constructor para el mapeo en FranjaHorariaMapperInfraestructuraDominio
     public Curso(Integer id) {

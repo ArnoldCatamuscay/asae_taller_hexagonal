@@ -14,7 +14,7 @@ public record FranjaHorariaDTORespuesta (
 
     LocalTime horaFin,
 
-    CursoDTORespuesta curso,
+    CursoDTORespuesta objCurso,
 
-    EspacioFisicoDTORespuesta espacioFisico
+    EspacioFisicoDTORespuesta objEspacioFisico
 ) {}

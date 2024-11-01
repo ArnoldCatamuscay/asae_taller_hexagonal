@@ -42,7 +42,7 @@ public class FranjaHorariaRestController {
     public ResponseEntity<List<FranjaHorariaDTORespuesta>> listarPorDocente(@Min(value = 0, message = "{filtrar.docente.id}") @PathVariable Integer id) {
         List<FranjaHoraria> franjasHorarias = objGestionarFranjaHorariaCUInt.listarPorDocente(id);
         ResponseEntity<List<FranjaHorariaDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDTORespuesta>>(
-            objMapeador.mappearDeFranjaHorariaARespuesta(franjasHorarias),
+            objMapeador.mappearDeFranjasHorariasARespuesta(franjasHorarias),
                 HttpStatus.OK);
         return objRespuesta;
     }

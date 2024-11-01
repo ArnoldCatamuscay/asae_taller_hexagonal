@@ -3,5 +3,5 @@ package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.infraestructura.input
 public record CursoDTORespuesta (
     String nombre,
     
-    AsignaturaDTORespuesta asignatura
+    AsignaturaDTORespuesta objAsignatura
 ) {}
