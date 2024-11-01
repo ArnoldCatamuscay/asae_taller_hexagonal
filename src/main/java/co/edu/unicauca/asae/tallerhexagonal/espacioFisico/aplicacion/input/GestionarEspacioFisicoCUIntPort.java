@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GestionarEspacioFisicoCUIntPort {
 
-	List<EspacioFisico> listar();
+	List<EspacioFisico> listar(String patron, Integer capacidad);
 
 	Boolean isEspacioFisicoOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, Integer id);
 

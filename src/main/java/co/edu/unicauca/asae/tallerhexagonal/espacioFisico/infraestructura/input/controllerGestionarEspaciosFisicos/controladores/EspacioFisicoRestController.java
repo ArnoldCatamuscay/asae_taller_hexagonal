@@ -23,14 +23,13 @@ public class EspacioFisicoRestController {
 	private final EspacioFisicoMapperInfraestructuraDominio objMapeador;
 
 	@GetMapping("/")
-	public ResponseEntity<List<EspacioFisicoDTORespuesta>> listar() {
+	public ResponseEntity<List<EspacioFisicoDTORespuesta>> listar(@RequestParam String patron, @RequestParam Integer capacidad) {
 		ResponseEntity<List<EspacioFisicoDTORespuesta>> objRespuesta = new ResponseEntity<>(
-			objMapeador.mappearDeEspaciosFisicosARespuesta(this.objGestionarEspacioFisicoCUInt.listar()),
+			objMapeador.mappearDeEspaciosFisicosARespuesta(this.objGestionarEspacioFisicoCUInt.listar(patron, capacidad)),
 			HttpStatus.OK);
 		return objRespuesta;
 	}
 
-	// Usado solo para pruebas, no es necesario en el controlador
 	@GetMapping("/isOccupied")
 	public Boolean isEspacioFisicoOccupied(
 		@RequestParam String dia,

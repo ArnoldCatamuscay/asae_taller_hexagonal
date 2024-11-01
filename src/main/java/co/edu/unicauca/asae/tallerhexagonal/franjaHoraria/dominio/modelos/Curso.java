@@ -1,8 +1,9 @@
 package co.edu.unicauca.asae.tallerhexagonal.franjaHoraria.dominio.modelos;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import co.edu.unicauca.asae.tallerhexagonal.docente.infraestructura.output.persistencia.entidades.DocenteEntity;
+import co.edu.unicauca.asae.tallerhexagonal.docente.dominio.modelos.Docente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,11 @@ public class Curso {
 
     private String nombre;
 
-    private Set<DocenteEntity> docentes;
+    private Asignatura objAsignatura;
+    
+    private Set<Docente> docentes = new HashSet<>();
 
-    // Constructor para el mapeo
-    // en FranjaHorariaMapperInfraestructuraDominio
+    // Constructor para el mapeo en FranjaHorariaMapperInfraestructuraDominio
     public Curso(Integer id) {
         this.id = id;
     }

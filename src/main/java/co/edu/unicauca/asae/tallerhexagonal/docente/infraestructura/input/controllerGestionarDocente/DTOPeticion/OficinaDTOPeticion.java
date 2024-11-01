@@ -5,9 +5,9 @@ import jakarta.validation.constraints.Size;
 
 public record OficinaDTOPeticion(
     @NotNull(message = "{oficina.nombre.null}")
-    @Size(min = 5, max = 20, message = "{oficina.nombre.size}")
+    @Size(min = 4, max = 20, message = "{oficina.nombre.size}")
     String nombre,
     @NotNull(message = "{oficina.ubicacion.null}")
-    @Size(min = 5, max = 50, message = "{oficina.ubicacion.size}")
+    @Size(min = 4, max = 50, message = "{oficina.ubicacion.size}")
     String ubicacion
 ) {}

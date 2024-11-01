@@ -6,8 +6,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppMapper {
-	@Bean
-	public ModelMapper crearMapper() {
-		return new ModelMapper();
+
+    @Bean
+    public ModelMapper crearMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+
+        return modelMapper;
 	}
 }

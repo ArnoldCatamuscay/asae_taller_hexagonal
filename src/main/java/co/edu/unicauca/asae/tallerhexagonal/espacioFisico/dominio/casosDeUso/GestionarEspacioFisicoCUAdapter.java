@@ -21,13 +21,18 @@ public class GestionarEspacioFisicoCUAdapter implements GestionarEspacioFisicoCU
 	}
 
 	@Override
-	public List<EspacioFisico> listar() {
-		List<EspacioFisico> listaObtenida = objGestionarEspacioFisicoGateway.listar();
+	public List<EspacioFisico> listar(String patron, Integer capacidad) {
+		List<EspacioFisico> listaObtenida = objGestionarEspacioFisicoGateway.listar(patron, capacidad);
+		if (listaObtenida.isEmpty()) {
+            objEspacioFisicoFormateadorResultados
+                .retornarRespuestaErrorEntidadNoExiste("No se encontraron espacios físicos con los criterios especificados.");
+        }
 		return listaObtenida;
 	}
 
 	@Override
 	public Boolean isEspacioFisicoOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, Integer id) {
+		
 		return objGestionarEspacioFisicoGateway.isEspacioFisicoOccupied(dia, horaInicio, horaFin, id);
 	}
 }

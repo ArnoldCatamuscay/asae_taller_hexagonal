@@ -15,6 +15,9 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
     @Override
     public Docente crear(Docente objDocente) {
         Docente objDocenteCreado = null;
+        if(this.objGestionarDocenteGateway.existePorCorreo(objDocente.getCorreo())){
+            this.objDocenteFormateadorResultados.retornarRespuestaErrorEntidadExiste("Error, el correo ya se encuentra registrado");
+        }
         objDocenteCreado = this.objGestionarDocenteGateway.guardar(objDocente);
         return objDocenteCreado;
     }

@@ -68,12 +68,12 @@ public class RestApiExceptionHandler {
 			.crearError(
 				CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(),
 				ex.formatException(),
-				HttpStatus.BAD_REQUEST.value()
+				HttpStatus.CONFLICT.value()
 			)
 			.setUrl(req.getRequestURL().toString())
 			.setMetodo(req.getMethod());
 
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
 	}
 
 	@ExceptionHandler(EntidadNoExisteException.class)

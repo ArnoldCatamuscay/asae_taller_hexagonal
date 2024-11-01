@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import co.edu.unicauca.asae.tallerhexagonal.commons.controladorExcepciones.excepcionesPropias.ReglaNegocioException;
 import co.edu.unicauca.asae.tallerhexagonal.docente.aplicacion.output.GestionarDocenteGatewayIntPort;
 import co.edu.unicauca.asae.tallerhexagonal.docente.dominio.modelos.Docente;
 import co.edu.unicauca.asae.tallerhexagonal.docente.infraestructura.output.persistencia.entidades.DocenteEntity;
@@ -35,11 +34,6 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
             DocenteEntity.class
         );
         
-        // Validar que el correo no esté registrado
-        if(objDocenteRepository.existsByCorreo(objDocenteEntity.getCorreo())){
-            throw new ReglaNegocioException("El correo ya se encuentra registrado");
-        }
-
         objDocenteEntity.setObjOficina(objOficinaEntity);
         DocenteEntity objDocenteEntityRegistrado = this.objDocenteRepository
 			.save(objDocenteEntity);
@@ -52,7 +46,13 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
 
     @Override
     public Boolean isDocenteOccupied(String dia, LocalTime horaInicio, LocalTime horaFin, int idDocente) {
-        return this.objDocenteRepository.isDocenteOcupado(dia, horaInicio, horaFin, idDocente)==1;
+        int cont = this.objDocenteRepository.isDocenteOcupado(dia, horaInicio, horaFin, idDocente);
+        return cont>0;
+    }
+
+    @Override
+    public Boolean existePorCorreo(String correo) {
+        return this.objDocenteRepository.existsByCorreo(correo);
     }
 
 }

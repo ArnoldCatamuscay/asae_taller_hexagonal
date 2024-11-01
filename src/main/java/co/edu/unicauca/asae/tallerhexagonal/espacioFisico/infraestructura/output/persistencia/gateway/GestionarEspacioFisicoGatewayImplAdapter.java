@@ -26,11 +26,10 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
 		this.espacioFisicoModelMapper = espacioFisicoModelMapper;
 	}
 
-	// TODO: Agregar parámetros de búsqueda para nombre y capacidad
 	@Override
-	public List<EspacioFisico> listar() {
+	public List<EspacioFisico> listar(String patron, Integer capacidad) {
 		Iterable<EspacioFisicoEntity> listaEntidades = this.objEspacioFisicoRepository
-			.findByNombreStartingWithIgnoreCaseAndCapacidadGreaterThanEqual("sa", 20);
+			.findByNombreStartingWithIgnoreCaseAndCapacidadGreaterThanEqual(patron, capacidad);
 		List<EspacioFisico> listaObtenida = this.espacioFisicoModelMapper.map(
 			listaEntidades,
 			new TypeToken<List<EspacioFisico>>() {}.getType()
@@ -49,14 +48,14 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
 	@Override
 	public EspacioFisico findById(Integer id) {
 		Optional<EspacioFisicoEntity> espacioFisicoBuscado = objEspacioFisicoRepository.findById(id);
-		// TODO: Usar excepcion EntidadNoExisteException
-		if (espacioFisicoBuscado.isEmpty()) {
+		if(espacioFisicoBuscado.isEmpty()) {
 			return null;
 		}
-		EspacioFisico espacioFisicoEncontrado = this.espacioFisicoModelMapper.map(
-			espacioFisicoBuscado.get(),
-			EspacioFisico.class
-		);
+
+		EspacioFisico espacioFisicoEncontrado = new EspacioFisico();
+		espacioFisicoEncontrado.setId(espacioFisicoBuscado.get().getId());
+		espacioFisicoEncontrado.setNombre(espacioFisicoBuscado.get().getNombre());
+		espacioFisicoEncontrado.setCapacidad(espacioFisicoBuscado.get().getCapacidad());
 
 		return espacioFisicoEncontrado;
 	}
